@@ -1,0 +1,42 @@
+﻿@page "/"
+@using Models;
+@using System.Timers;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
+
+<h1>@_schedule.Name</h1>
+
+@foreach (var section in _schedule.Sections)
+{
+    <SectionTimer SectionInfo="@section" />
+}
+
+@code {
+
+    private Schedule _schedule;
+
+    private System.Timers.Timer _timer;
+
+    protected override Task OnInitializedAsync()
+    {
+        _schedule = new Schedule("Dapr workshop");
+        _schedule.AddSection("Introduction", "Sander", TimeSpan.FromSeconds(10));
+        _schedule.AddSection("Dapr Into", "Edwin", TimeSpan.FromSeconds(15));
+        _schedule.AddSection("Components + demo", "Sander", TimeSpan.FromSeconds(10));
+
+        _timer = new System.Timers.Timer(1000);
+        _timer.Elapsed += OnTimedEvent;
+        _timer.AutoReset = true;
+        _timer.Enabled = true;
+
+        return Task.CompletedTask;
+    }
+
+    private void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        if (_schedule != null)
+        {
+            _schedule.Tick();
+            StateHasChanged();
+        }
+    }
+}

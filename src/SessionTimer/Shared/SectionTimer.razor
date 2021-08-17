@@ -1,0 +1,21 @@
+﻿@using Models;
+
+<table>
+    <tr style="height: 35px; background-color: @(SectionInfo.Enabled ? "DarkSlateBlue" : "None")">
+        <td style="padding-left: 10px;" width="350px">@SectionInfo.Name</td>
+        <td width="100px">@SectionInfo.Speaker</td>
+        <td width="15px">
+            @if (SectionInfo.Enabled)
+            {
+                <span>&#9654;</span>
+            }
+        </td>
+        <td width="150px" align="center">@SectionInfo.CurrentTime</td>
+        <td width="275px"><progress max="@SectionInfo.Time.TotalSeconds" value="@SectionInfo.CurrentTime.TotalSeconds" /></td>
+    </tr>
+</table>
+
+@code {
+    [Parameter]
+    public Section SectionInfo { get; set; }
+}
