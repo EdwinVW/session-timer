@@ -6,7 +6,7 @@ This repo contains the code for a timer app you can use for timing multiple sect
 
 - Each session has a name, shown at the top of the screen.
 - The session consists of multiple sections.
-- Each section is shown with its name, duration and a progress bar.
+- Each section is shown with its name, speaker, duration and a progress bar.
 - The active section is indicated by a play-button icon.
 - The progress bar counts back for the duration of the active section.
 - When the timer of a section reaches 0:00, the next section will automatically become active.
